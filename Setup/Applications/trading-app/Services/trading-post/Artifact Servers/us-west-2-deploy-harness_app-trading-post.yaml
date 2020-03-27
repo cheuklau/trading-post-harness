@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: AMI
+amiTags:
+- name: deploy
+  value: harness
+- name: app
+  value: trading-post
+region: us-west-2
+serverName: trading-post
