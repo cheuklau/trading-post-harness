@@ -12,3 +12,5 @@ infrastructure:
   cloudProviderName: trading-post
   hostNameConvention: ${host.ec2Instance.privateDnsName.split('\.')[0]}
   region: us-west-2
+scopedServices:
+- trading-post
