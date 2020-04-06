@@ -1,5 +1,9 @@
 harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: AMI
+configVariables:
+- name: rds-endpoint
+  value: terraform-20200406013845232300000001.cuylawe6ymni.us-west-2.rds.amazonaws.com
+  valueType: TEXT
 deploymentType: AMI
 description: Main trading-post service
