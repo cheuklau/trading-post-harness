@@ -101,6 +101,15 @@ phases:
     stepsInParallel: false
   - type: WRAP_UP
     name: Wrap Up
+    steps:
+    - type: EMAIL
+      name: Email
+      properties:
+        body: ''
+        ccAddress: ''
+        ignoreDeliveryFailure: false
+        subject: trading-post app canary deploy complete
+        toAddress: chucklingchuck@gmail.com
     stepsInParallel: false
   provisionNodes: false
   serviceName: trading-post
