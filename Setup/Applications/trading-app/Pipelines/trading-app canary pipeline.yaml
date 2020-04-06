@@ -8,3 +8,10 @@ pipelineStages:
     type: DO_NOT_SKIP
   stageName: STAGE 1
   workflowName: collect artifact
+- type: ENV_STATE
+  name: trading-post canary deploy
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 2
+  workflowName: trading-post canary deploy
