@@ -1,0 +1,14 @@
+harnessApiVersion: '1.0'
+type: INFRA_DEFINITION
+cloudProviderType: AWS
+deploymentType: AMI
+infrastructure:
+- type: AWS_AMI
+  amiDeploymentType: AWS_ASG
+  asgIdentifiesWorkload: false
+  autoScalingGroupName: tf-asg-20200405212535076200000002
+  classicLoadBalancers:
+  - mtgtradingpost
+  cloudProviderName: trading-post
+  hostNameConvention: ${host.ec2Instance.privateDnsName.split('\.')[0]}
+  region: us-west-2
