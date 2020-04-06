@@ -16,4 +16,13 @@ notificationRules:
   userGroupAsExpression: false
   userGroupIds:
   - AHgJHIftQ2GgBevhUwkbMA
+preDeploymentSteps:
+- type: EMAIL
+  name: Email
+  properties:
+    body: ''
+    ccAddress: ''
+    ignoreDeliveryFailure: false
+    subject: Starting Canary deploy of trading-post app
+    toAddress: chucklingchuck@gmail.com
 templatized: false
