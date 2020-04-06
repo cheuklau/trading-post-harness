@@ -16,6 +16,38 @@ notificationRules:
   userGroupAsExpression: false
   userGroupIds:
   - AHgJHIftQ2GgBevhUwkbMA
+phases:
+- type: AMI
+  computeProviderName: trading-post
+  daemonSet: false
+  infraDefinitionName: trading-post
+  name: Phase 1
+  phaseSteps:
+  - type: AMI_AUTOSCALING_GROUP_SETUP
+    name: Setup AutoScaling Group
+    steps:
+    - type: AWS_AMI_SERVICE_SETUP
+      name: AWS AutoScaling Group Setup
+      properties:
+        autoScalingSteadyStateTimeout: 10
+        blueGreen: false
+        maxInstances: 10
+    stepsInParallel: false
+  - type: AMI_DEPLOY_AUTOSCALING_GROUP
+    name: Deploy Service
+    steps:
+    - type: AWS_AMI_SERVICE_DEPLOY
+      name: Upgrade AutoScaling Group
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: trading-post
+  statefulSet: false
 preDeploymentSteps:
 - type: EMAIL
   name: Email
@@ -25,4 +57,31 @@ preDeploymentSteps:
     ignoreDeliveryFailure: false
     subject: Starting Canary deploy of trading-post app
     toAddress: chucklingchuck@gmail.com
+rollbackPhases:
+- type: AMI
+  computeProviderName: trading-post
+  daemonSet: false
+  infraDefinitionName: trading-post
+  name: Rollback Phase 1
+  phaseNameForRollback: Phase 1
+  phaseSteps:
+  - type: AMI_DEPLOY_AUTOSCALING_GROUP
+    name: Rollback Service
+    phaseStepNameForRollback: Deploy Service
+    statusForRollback: SUCCESS
+    steps:
+    - type: AWS_AMI_SERVICE_ROLLBACK
+      name: Rollback AutoScaling Group
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Service
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: trading-post
+  statefulSet: false
 templatized: false
