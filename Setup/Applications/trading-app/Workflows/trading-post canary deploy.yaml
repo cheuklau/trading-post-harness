@@ -81,6 +81,12 @@ phases:
     steps:
     - type: AWS_AMI_SERVICE_DEPLOY
       name: Upgrade AutoScaling Group
+      properties:
+        instanceCount: 100
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
     stepsInParallel: false
   - type: VERIFY_SERVICE
     name: Verify Service
