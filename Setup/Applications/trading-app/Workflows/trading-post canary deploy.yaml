@@ -55,6 +55,14 @@ phases:
     stepsInParallel: false
   - type: VERIFY_SERVICE
     name: Verify Service
+    steps:
+    - type: APPROVAL
+      name: Approval
+      properties:
+        approvalStateType: USER_GROUP
+        timeoutMillis: 1800000
+        userGroups:
+        - AHgJHIftQ2GgBevhUwkbMA
     stepsInParallel: false
   - type: WRAP_UP
     name: Wrap Up
