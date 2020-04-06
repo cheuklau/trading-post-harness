@@ -29,9 +29,17 @@ phases:
     - type: AWS_AMI_SERVICE_SETUP
       name: AWS AutoScaling Group Setup
       properties:
+        autoScalingGroupName: ${app.name}_${service.name}_${env.name}
         autoScalingSteadyStateTimeout: 10
         blueGreen: false
-        maxInstances: 10
+        desiredInstances: 2
+        maxInstances: 2
+        minInstances: 0
+        resizeStrategy: RESIZE_NEW_FIRST
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        useCurrentRunningCount: false
     stepsInParallel: false
   - type: AMI_DEPLOY_AUTOSCALING_GROUP
     name: Deploy Service
